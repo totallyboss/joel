@@ -1,6 +1,25 @@
 module.exports = {
-  entry: "./entry.js",
-  output: {
-    filename: "bundle.js"
-  }
+    entry: ["./global.js", "./entry.js"],
+    output: {
+        filename: "bundle.js"
+    },
+    module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'jshint-loader'
+            }
+        ],
+        loaders: [
+            {
+                test: [/\.js$/, /\.es6$/],
+                exclude: 'node_modules',
+                loader: 'babel-loader'
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.es6']
+    },
 }
